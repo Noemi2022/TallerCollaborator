@@ -2,5 +2,8 @@
 {
     public class ProjectAddRequest
     {
+
+        public string name { get; set; }
+      
     }
 }

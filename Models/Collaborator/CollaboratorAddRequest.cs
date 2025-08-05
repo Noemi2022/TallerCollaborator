@@ -2,5 +2,7 @@
 {
     public class CollaboratorAddRequest
     {
+        public string name { get; set; }
+       
     }
 }

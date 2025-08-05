@@ -1,13 +1,10 @@
-﻿namespace Proyecto.Models.Collaborator
+﻿namespace Proyecto.Models.Language
 {
-    public class CollaboratorAllResponse
+    public class LanguageAllResponse
     {
-
-
-       
         public string id { get; set; }
         public string name { get; set; }
-     
+       
 
         public string GetId()   // This is the getter
         {

@@ -2,7 +2,6 @@
 {
     public class ProjectModel
     {
-
         private string id;
         private string name;
         private DateTime dateReg;
@@ -18,7 +17,6 @@
         public string GetId() { return id; }
 
         public string GetName() { return name; }
-
 
         public DateTime GetDateReg() { return dateReg; }
 
