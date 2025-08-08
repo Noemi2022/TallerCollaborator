@@ -2,7 +2,7 @@
 
 namespace Proyecto.Repository
 {
-    public class ProjectCollaboratorRepository
+    public class CollaboratorLanguageRepository
     {
         public static List<ProjectCollaboratorModel> projectCollaborator = new List<ProjectCollaboratorModel>();
 
@@ -19,13 +19,7 @@ namespace Proyecto.Repository
 
         public List<ProjectCollaboratorModel> GetCollaboratorByProjectId(string projectId)
         {
-            return projectCollaborator.Where((projectCollaborator) => projectCollaborator.GetProject() == projectId).ToList();
+            return projectCollaborator.Where((projectcollaborator) => projectcollaborator.GetCollaborator() == projectId).ToList();
         }
     }
-    
 }
-
-
-
-
-

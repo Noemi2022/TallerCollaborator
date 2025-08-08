@@ -8,7 +8,7 @@ namespace Proyecto.Repository
         static List<ProjectModel> projects = new List<ProjectModel>();
 
 
-
+        //SI PARA EL ID
         public List<ProjectModel> GetList()
         {
             return projects;
@@ -24,8 +24,8 @@ namespace Proyecto.Repository
             return projects.FirstOrDefault((model) => model.GetName() == name);         
         }
 
-       
 
+        //SI PARA EL ID GetLastProjects() Y gETnEWId y AddNewProject
         public ProjectModel? GetLastProjects()
         {
             int countProject = projects.Count();

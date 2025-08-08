@@ -1,8 +1,11 @@
-﻿using Proyecto.Models.Colaborador;
-using Proyecto.Models.Collaborator;
-using Proyecto.Repository;
+﻿using System.Reflection;
 using Proyecto.Helpers.Models;
-
+using Proyecto.Helpers.Vars;
+using Proyecto.Models.Colaborador;
+using Proyecto.Models.Collaborator;
+using Proyecto.Models.Proyecto;
+using Proyecto.Models.ProyectoColaborador;
+using Proyecto.Repository;
 namespace Proyecto.Bll
 {
     public class CollaboratorBll
@@ -23,37 +26,41 @@ namespace Proyecto.Bll
             return list;
         }
 
-        //public bool AddCollaboratos(CollaboratorAddRequest request)
-        //{
-        //    CollaboratorModel model = new CollaboratorModel(request.name, request.lastName, request.year);
+    public bool AddCollaborators(CollaboratorAddRequest request)
+        {
+            CollaboratorModel model = new CollaboratorModel(request.name);
 
-        //    return repository.AddNewStudent(model);
-        //}
+            return repository.AddNewCollaborator(model);
+        }
 
-        //public ResponseGeneralModel<string> RegisterStudentInClassroom(ClassroomStudentRegisterRequest request)
-        //{
-        //    CollaboratorModel? studentFind = repository.GetStudentsById(request.studentId);
-        //    if (studentFind == null) return new ResponseGeneralModel<string>(400, null, Message.saveClassromStudentErrorIdStudent, Message.saveClassromStudentErrorIdStudent);
+        public ResponseGeneralModel<string> RegisterCollaboratorInProject(ProjectCollaboratorRegisterRequest request)
+        {  
+            CollaboratorModel? studentFind = repository.GetCollaboratorsById(request.collaboratorId);
+            if (studentFind == null) return new ResponseGeneralModel<string>(400, null, Message.saveProjectCollaboratorErrorIdCollaborator, Message.saveProjectCollaboratorErrorIdCollaborator);
 
-        //    ClassroomModel? classroomFind = (new ClassroomRepository()).GetClassroomById(request.classroomId);
-        //    if (classroomFind == null) return new ResponseGeneralModel<string>(400, null, Message.saveClassromStudentErrorIdClassroom, Message.saveClassromStudentErrorIdClassroom);
+           ProjectModel? projectFind = (new ProjectRepository()).GetProjectById(request.projectId);
+            if (projectFind == null) return new ResponseGeneralModel<string>(400, null, Message.saveProjectCollaboratorErrorIdProject, Message.saveProjectCollaboratorErrorIdProject);
 
 
-        //    ClassroomStudentModel modelSave = new ClassroomStudentModel(request.classroomId, request.studentId);
-        //    bool isOk = (new ClassroomStudentRepository()).SaveClassroomStudent(modelSave);
+            ProjectCollaboratorModel modelSave = new ProjectCollaboratorModel(request.projectId, request.collaboratorId);
+            bool isOk = (new ProjectCollaboratorRepository()).SaveProjectCollaborator(modelSave);
 
-        //    return new ResponseGeneralModel<string>((isOk) ? 200 : 500, null, (isOk) ? Message.saveClassromStudentOk : Message.errorGeneral, "");
-        //}
+            return new ResponseGeneralModel<string>((isOk) ? 200 : 500, null, (isOk) ? Message.saveProjectCollaboratorOk : Message.errorGeneral, "");
+        }
 
 
 
         private CollaboratorAllResponse ModelToResponse(CollaboratorModel model)
         {
             CollaboratorAllResponse response = new CollaboratorAllResponse();
-            response.SetId(model.GetId());
+           // response.SetId(model.GetId());
+            response.id = model.GetId();
             response.name = model.GetName();
            
             return response;
         }
+
+
+       
     }
 }

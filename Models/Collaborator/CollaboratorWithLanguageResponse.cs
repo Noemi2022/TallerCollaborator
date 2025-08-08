@@ -1,4 +1,5 @@
-﻿using Proyecto.Models.Language;
+﻿using Proyecto.Models.Collaborator;
+using Proyecto.Models.Language;
 
 namespace Proyecto.Models.Colaborador
 {
@@ -8,5 +9,6 @@ namespace Proyecto.Models.Colaborador
         public string name { get; set; }
 
         public List<LanguageAllResponse> languages { get; set; }
+
     }
 }

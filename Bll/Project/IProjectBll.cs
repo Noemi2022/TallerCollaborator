@@ -10,7 +10,11 @@ namespace Proyecto.Bll.Project
         
         public ResponseGeneralModel<ProjectAllResponse?> GetProjectById(string id);
         public List<ProjectWithCollaboratorResponse> ListProjectWithCollaborator();
+
+         public ResponseGeneralModel<List<ProjectModel>> AddProject(ProjectAddRequest request);
        
-        
+      
+        //public bool DeleteClassroom(string id);
+
     }
 }

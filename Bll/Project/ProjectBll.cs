@@ -1,4 +1,7 @@
-﻿using Proyecto.Helpers.Models;
+﻿using System.IO.Pipelines;
+using System.Reflection;
+using Microsoft.Extensions.Configuration;
+using Proyecto.Helpers.Models;
 using Proyecto.Helpers.Vars;
 using Proyecto.Models.Colaborador;
 using Proyecto.Models.Collaborator;
@@ -6,9 +9,6 @@ using Proyecto.Models.Project;
 using Proyecto.Models.Proyecto;
 using Proyecto.Models.ProyectoColaborador;
 using Proyecto.Repository;
-using System.IO.Pipelines;
-using System.Reflection;
-
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Proyecto.Bll.Project
@@ -25,7 +25,7 @@ namespace Proyecto.Bll.Project
             _configuration = configuration;
         }
 
-
+       
         public List<ProjectAllResponse> GetProjects()
         {
             if (repository.GetList().Count() == 0) //getList es de la clase ClassroomRepository 
@@ -57,6 +57,12 @@ namespace Proyecto.Bll.Project
             return list;
         }
 
+
+
+
+
+
+
         public ResponseGeneralModel<ProjectAllResponse?> GetProjectById(string id)
         {
             ProjectModel? model = repository.GetProjectById(id);
@@ -70,7 +76,7 @@ namespace Proyecto.Bll.Project
 
             return new ResponseGeneralModel<ProjectAllResponse?>(200, response, Message.getProjectByIdOk);
         }
-      
+
 
         public List<ProjectWithCollaboratorResponse> ListProjectWithCollaborator()
         {
@@ -79,56 +85,39 @@ namespace Proyecto.Bll.Project
                 select new ProjectWithCollaboratorResponse()
                 {
                     projectId = model.GetId(),
-                    name = model.GetName(),       
+                    name = model.GetName(),
                     collaborators = (from projectCollaborator in new ProjectCollaboratorRepository().GetCollaboratorByProjectId(model.GetId())
                                 join collabModel in new CollaboratorRepository().GetCollaborators() on projectCollaborator.GetCollaborator() equals collabModel.GetId()
                                 select new CollaboratorAllResponse()
                                 {
+                                     
                                     id = collabModel.GetId(),
                                     name = collabModel.GetName(),
                                    
                                 }).ToList()
                 }
             ).ToList();
-
-            //return repository.GetList().Select((model) => new ClassroomWithStudentReponse()
-            //{
-            //    classromId = model.GetId(),
-            //    name = model.GetName(),
-            //    year = model.GetYear(),
-            //    students = new ClassroomStudentRepository().GetStudentByClassroomId(model.GetId()).Select((classStud) =>
-            //    {
-            //        StudentModel studModel = new StudentRepository().GetStudentsById(classStud.GetStudent());
-            //        return new StudentAllResponse()
-            //        {
-            //            id = studModel.GetId(),
-            //            name = studModel.GetName(),
-            //            lastName = studModel.GetLastName(),
-            //            year = studModel.GetYear()
-            //        };
-            //    }).ToList()
-            //}).ToList();
-
            
+
         }
 
-        //public ResponseGeneralModel<List<ClassroomModel>> AddClassroom(ClassroomAddRequest request)
-        //{
-        //    ClassroomModel modelF = repository.GetClassroomByName(request.name);
+        public ResponseGeneralModel<List<ProjectModel>> AddProject(ProjectAddRequest request)
+        {
+            ProjectModel modelF = repository.GetProjectByName(request.name);
 
-        //    if (modelF == null)
-        //    {
-        //        ClassroomModel model = new ClassroomModel(request.name, request.year);
+            if (modelF == null)
+            {
+                ProjectModel model = new ProjectModel(request.name);
 
-        //        bool isAdd = repository.AddNewClassroom(model);
+                bool isAdd = repository.AddNewProject(model);
 
-        //        return new ResponseGeneralModel<List<ClassroomModel>>(isAdd ? 200 : 500, null, isAdd ? Message.addClassroomOk : Message.addClassroomError);
-        //    }
-        //    else
-        //    {
-        //        return new ResponseGeneralModel<List<ClassroomModel>>(400, null, Message.addClassroomDuplicate);
-        //    }
-        //}
+                return new ResponseGeneralModel<List<ProjectModel>>(isAdd ? 200 : 500, null, isAdd ? Message.addProjectOk : Message.addProjectError);
+            }
+            else
+            {
+                return new ResponseGeneralModel<List<ProjectModel>>(400, null, Message.addProjectDuplicate);
+            }
+        }
 
 
         //public bool EditYearClassroom(string id, int year)
@@ -151,3 +140,18 @@ namespace Proyecto.Bll.Project
         }
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
