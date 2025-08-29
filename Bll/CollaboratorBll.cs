@@ -3,6 +3,7 @@ using Proyecto.Helpers.Models;
 using Proyecto.Helpers.Vars;
 using Proyecto.Models.Colaborador;
 using Proyecto.Models.Collaborator;
+using Proyecto.Models.Language;
 using Proyecto.Models.Proyecto;
 using Proyecto.Models.ProyectoColaborador;
 using Proyecto.Repository;
@@ -12,6 +13,7 @@ namespace Proyecto.Bll
     {
 
         CollaboratorRepository repository = new CollaboratorRepository();
+       
 
         public List<CollaboratorAllResponse> GetCollaborators()
         {
@@ -53,7 +55,6 @@ namespace Proyecto.Bll
         private CollaboratorAllResponse ModelToResponse(CollaboratorModel model)
         {
             CollaboratorAllResponse response = new CollaboratorAllResponse();
-           // response.SetId(model.GetId());
             response.id = model.GetId();
             response.name = model.GetName();
            

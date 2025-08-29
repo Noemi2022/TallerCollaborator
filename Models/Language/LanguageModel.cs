@@ -2,21 +2,17 @@
 {
     public class LanguageModel
     {
-        private string id;
-        private string name;
-       
+        public string languageid { get; set; }
+        public string name { get; set; }
 
         public LanguageModel(string name)
         {
             Guid guid = Guid.NewGuid();
-            this.id = guid.ToString();
-            this.name = name;         
+            this.languageid = guid.ToString();
+            this.name = name;
+           
         }
-
-        public string GetId() { return id; }
-
-        public string GetName() { return name; }
-
-       
-}
+        public string GetLanguageid() {  return languageid; }
+        public string Getname() { return name; }
+    }
 }

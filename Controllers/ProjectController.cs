@@ -42,28 +42,20 @@ namespace Proyecto.Controllers
             return new ResponseGeneralModel<List<ProjectWithCollaboratorResponse>>(200, bll.ListProjectWithCollaborator(), "");
         }
 
-       
 
-        //[HttpGet("prueba/{dato}")]
-        //public bool GetPrueba(string dato)
+        //// GET api/<ProjectController>/5
+        //[HttpGet("{id}")]
+        //public ResponseGeneralModel<ProjectAllResponse?> Get(string id)
         //{
-        //    Regex regEx = new Regex(VarHelper.regExParamString);
-        //    return regEx.IsMatch(dato);
+        //    try
+        //    {
+        //        return bll.GetProjectById(id);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return new ResponseGeneralModel<ProjectAllResponse?>(500, null, Message.errorGeneral);
+        //    }
         //}
-
-        // GET api/<ProjectController>/5
-        [HttpGet("{id}")]
-        public ResponseGeneralModel<ProjectAllResponse?> Get(string id)
-        {
-            try
-            {
-                return bll.GetProjectById(id);
-            }
-            catch (Exception ex)
-            {
-                return new ResponseGeneralModel<ProjectAllResponse?>(500, null, Message.errorGeneral);
-            }
-        }
 
 
 
@@ -76,7 +68,7 @@ namespace Proyecto.Controllers
             // return new ResponseGeneralModel<List<ClassroomModel>>((isOk) ? 200 : 500, null, ""); //esto es if ternario
             try
             {
-                ResponseGeneralModel<List<ProjectModel>> validateD = validate.AddClassroom(item);
+                ResponseGeneralModel<List<ProjectModel>> validateD = validate.AddProject(item);
                 if (validateD.code != 200) return validateD;
 
                 return bll.AddProject(item);
@@ -87,22 +79,6 @@ namespace Proyecto.Controllers
             }
         }
 
-
-
-        // PUT api/<ProjectController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-
-
-
-        // DELETE api/<ProjectController>/5
-        [HttpDelete("{id}")]
-        public void delete(int id, [FromBody] string value)
-        {
-        }
 
     }
 }

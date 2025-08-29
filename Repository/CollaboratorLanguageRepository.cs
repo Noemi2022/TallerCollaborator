@@ -1,25 +1,37 @@
-﻿using Proyecto.Models.ProyectoColaborador;
+﻿using Proyecto.Models.Colaborador;
+using Proyecto.Models.Collaborator;
+using Proyecto.Models.Language;
+using Proyecto.Models.ProyectoColaborador;
 
 namespace Proyecto.Repository
 {
     public class CollaboratorLanguageRepository
     {
-        public static List<ProjectCollaboratorModel> projectCollaborator = new List<ProjectCollaboratorModel>();
+        
+        static List<CollaboratorLanguageModel> collaboratorsLanguage = new List<CollaboratorLanguageModel>();
 
-        public bool SaveProjectCollaborator(ProjectCollaboratorModel model)
+        public bool AddCollaboratorLanguage(string idColaborador, List<LanguageModel> language)
         {
-            projectCollaborator.Add(model);
+            CollaboratorLanguageModel collaborator = new CollaboratorLanguageModel(idColaborador, language);
+            collaboratorsLanguage.Add(collaborator);
             return true;
         }
 
-        public List<ProjectCollaboratorModel> GetCollaborator()
+        public List<CollaboratorLanguageModel> GetElGordo()
         {
-            return projectCollaborator;
+            return collaboratorsLanguage;
         }
 
-        public List<ProjectCollaboratorModel> GetCollaboratorByProjectId(string projectId)
+        public CollaboratorLanguageModel? GetCollaboratorById(string id)
         {
-            return projectCollaborator.Where((projectcollaborator) => projectcollaborator.GetCollaborator() == projectId).ToList();
+            return collaboratorsLanguage.FirstOrDefault((model) => model.GetId() == id);
+        }
+
+        public bool RemoveCollaboratorLanguage(string id)
+        {
+           CollaboratorLanguageModel? model = GetCollaboratorById(id);
+            if (model == null) return false;
+            return collaboratorsLanguage.Remove(model);  //para usar el remove tengo que madnar tod el modelo
         }
     }
 }

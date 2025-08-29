@@ -14,7 +14,5 @@ namespace Proyecto.Bll.Project
          public ResponseGeneralModel<List<ProjectModel>> AddProject(ProjectAddRequest request);
        
       
-        //public bool DeleteClassroom(string id);
-
     }
 }

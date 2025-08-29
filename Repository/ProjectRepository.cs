@@ -39,11 +39,6 @@ namespace Proyecto.Repository
             return true;
         }
 
-        //public bool RemoveClassroom(string id)
-        //{
-        //    ClassroomModel? model = GetClassroomById(id);
-        //    if (model == null) return false;
-        //    return classrooms.Remove(model);
-        //}
+       
     }
 }

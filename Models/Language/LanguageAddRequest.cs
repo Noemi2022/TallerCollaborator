@@ -1,8 +1,7 @@
 ﻿namespace Proyecto.Models.Language
 {
-    public class LanguageAllResponse
+    public class LanguageAddRequest
     {
-        public string languageid { get; set; }
         public string name { get; set; }
     }
 }

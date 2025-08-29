@@ -25,18 +25,6 @@ namespace Proyecto.Controllers
         }
 
   
-        // [HttpGet("Language")]
-        //public ResponseGeneralModel<List<CollaboratorWithLanguageResponse>> GetWithCollaborators()
-        //{
-        //    return new ResponseGeneralModel<List<CollaboratorWithLanguageResponse>>(200, bll.ListCollaboratorWithLanguage(), "");
-        //}
-
-        // GET api/<CollaboratorController>/5
-        //[HttpGet("{id}")]
-        //public string Get(int id)
-        //{
-        //    return "value";
-        //}
 
         // POST api/<CollaboratorController>
         [HttpPost]
@@ -45,25 +33,18 @@ namespace Proyecto.Controllers
             bool isOk = bll.AddCollaborators(item);
             return new ResponseGeneralModel<List<CollaboratorAllResponse>>((isOk) ? 200 : 500, null, (isOk) ? Message.addCollaboratorOk : Message.addProjectError);
         }
+
+
         
+
         [HttpPost("register")]
         public ResponseGeneralModel<string> RegisterCollaborator([FromBody] ProjectCollaboratorRegisterRequest request)
         {
             return bll.RegisterCollaboratorInProject(request);
-            //bool isOk = bll.RegisterStudentInClassroom(request);
-            //return new ResponseGeneralModel<string>((isOk) ? 200 : 500, null, (isOk) ? Message.addClassroomOk : Message.addClassroomError);
         }
 
-        // PUT api/<CollaboratorController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
+       
 
-        // DELETE api/<CollaboratorController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
+       
     }
 }

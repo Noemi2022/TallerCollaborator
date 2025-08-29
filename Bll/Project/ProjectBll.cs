@@ -119,17 +119,6 @@ namespace Proyecto.Bll.Project
             }
         }
 
-
-        //public bool EditYearClassroom(string id, int year)
-        //{
-        //    return repository.EditYearClassroom(id, year);
-        //}
-
-        //public bool DeleteClassroom(string id)
-        //{
-        //    return repository.RemoveClassroom(id);
-        //}
-
         private ProjectAllResponse ModelToResponse(ProjectModel model)
         {
             ProjectAllResponse response = new ProjectAllResponse();

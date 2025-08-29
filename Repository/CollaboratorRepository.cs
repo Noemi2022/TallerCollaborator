@@ -32,11 +32,8 @@ namespace Proyecto.Repository
             return true;
         }
 
-        //public bool RemoveStudent(string id)
-        //{
-        //    CollaboratorModel? model = GetStudentsById(id);
-        //    if (model == null) return false;
-        //    return students.Remove(model);
-        //}
+
+        
+        
     }
 }
